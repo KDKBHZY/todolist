@@ -12,17 +12,38 @@ struct ContentView: View {
         singletodo(title:"吃饭",duedate:Date()),
         singletodo(title:"玩耍",duedate:Date()),
     ])
+    @State var showeditpage = false
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true, content: {
-                    VStack {
-                        ForEach(self.userdata.todolist){ item in
-                            singlecardview(index: item.id
-                            ).environmentObject(self.userdata)
-                            
-                        }.padding()
+        ZStack {
+            ScrollView(.vertical, showsIndicators: true, content: {
+                        VStack {
+                            ForEach(self.userdata.todolist){ item in
+                                singlecardview(index: item.id
+                                ).environmentObject(self.userdata)
+                                
+                            }.padding()
 
 
                     }        })
+            
+            HStack {
+                Spacer()
+                VStack {
+                    Spacer()
+                    Button(action: {self.showeditpage = true}, label: {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 90, height: 90, alignment: .center)
+                                .foregroundColor(.blue)                    })
+                        .sheet(isPresented: self.$showeditpage, content: {
+                            editview()
+                                .environmentObject(self.userdata)
+                        })
+                    
+                }.padding()
+            }
+        }
        
     }
 }

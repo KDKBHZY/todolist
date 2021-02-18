@@ -8,8 +8,37 @@
 import SwiftUI
 
 struct editview: View {
+    @EnvironmentObject var userdata:todo
+    @State var title:String = ""
+    @State var duedate:Date = Date()
+    @Environment(\.presentationMode) var presentation
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            Form{
+            Section(header: Text("事项")){
+                    TextField("事项内容",text:self.$title)
+                   
+                    DatePicker(selection: self.$duedate, label: { Text("截止日期") })
+                }
+                Section{
+                    Button(action: {
+                        self.userdata.add(data: singletodo(title: self.title, duedate: self.duedate))
+                        self.presentation.wrappedValue.dismiss()
+                        
+                    }, label: {
+                        Text("确认")
+                    })
+                    
+                    Button(action: {self.presentation.wrappedValue.dismiss()}, label: {
+                        Text("取消")
+                    })
+                }
+            }.navigationBarTitle("编辑")
+                
+
+            
+
+        }
     }
 }
 
