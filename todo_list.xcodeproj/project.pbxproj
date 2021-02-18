@@ -15,6 +15,7 @@
 		06AA773F25DE01EF001D9355 /* todo_listUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA773E25DE01EF001D9355 /* todo_listUITests.swift */; };
 		06AA775025DE135B001D9355 /* userdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA774F25DE135B001D9355 /* userdata.swift */; };
 		06AA775525DE612C001D9355 /* controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA775425DE612C001D9355 /* controller.swift */; };
+		06AA775D25DE6396001D9355 /* editview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA775C25DE6396001D9355 /* editview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		06AA774025DE01EF001D9355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06AA774F25DE135B001D9355 /* userdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userdata.swift; sourceTree = "<group>"; };
 		06AA775425DE612C001D9355 /* controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controller.swift; sourceTree = "<group>"; };
+		06AA775C25DE6396001D9355 /* editview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +101,9 @@
 		06AA772025DE01ED001D9355 /* todo_list */ = {
 			isa = PBXGroup;
 			children = (
-				06AA772125DE01ED001D9355 /* todo_listApp.swift */,
-				06AA772325DE01ED001D9355 /* ContentView.swift */,
-				06AA774F25DE135B001D9355 /* userdata.swift */,
-				06AA775425DE612C001D9355 /* controller.swift */,
+				06AA776625DE63C1001D9355 /* controller */,
+				06AA776525DE63B4001D9355 /* model */,
+				06AA776425DE63A4001D9355 /* view */,
 				06AA772525DE01EF001D9355 /* Assets.xcassets */,
 				06AA772A25DE01EF001D9355 /* Info.plist */,
 				06AA772725DE01EF001D9355 /* Preview Content */,
@@ -134,6 +135,32 @@
 				06AA774025DE01EF001D9355 /* Info.plist */,
 			);
 			path = todo_listUITests;
+			sourceTree = "<group>";
+		};
+		06AA776425DE63A4001D9355 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				06AA772125DE01ED001D9355 /* todo_listApp.swift */,
+				06AA772325DE01ED001D9355 /* ContentView.swift */,
+				06AA775C25DE6396001D9355 /* editview.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		06AA776525DE63B4001D9355 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				06AA774F25DE135B001D9355 /* userdata.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		06AA776625DE63C1001D9355 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				06AA775425DE612C001D9355 /* controller.swift */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +296,7 @@
 				06AA775025DE135B001D9355 /* userdata.swift in Sources */,
 				06AA772225DE01ED001D9355 /* todo_listApp.swift in Sources */,
 				06AA775525DE612C001D9355 /* controller.swift in Sources */,
+				06AA775D25DE6396001D9355 /* editview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
