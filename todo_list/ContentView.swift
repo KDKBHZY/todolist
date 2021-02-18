@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @ObservedObject var userdata:todo = todo(data: [singletodo(title:"写作",duedate:Date()),
+        singletodo(title:"吃饭",duedate:Date()),
+        singletodo(title:"玩耍",duedate:Date()),
+    ])
     var body: some View {
         ScrollView(.vertical, showsIndicators: true, content: {
                     VStack {
-                        ForEach(0..<10){ item in
-                            singlecardview(title:item.description)
+                        ForEach(self.userdata.todolist){ item in
+                            singlecardview(index: item.id
+                            ).environmentObject(self.userdata)
                             
                         }.padding()
 
@@ -24,9 +28,8 @@ struct ContentView: View {
 }
 
 struct singlecardview:View {
-    @State var ischecked:Bool = false
-    @State var title:String = ""
-    @State var duedate:Date = Date()
+   @EnvironmentObject var userdata:todo
+    var index:Int
 
     var body: some View{
         HStack {
@@ -34,20 +37,20 @@ struct singlecardview:View {
                 .frame(width: 8)
                 .foregroundColor(.blue)
             VStack(alignment: .leading, spacing:6) {
-                Text(self.title)
+                Text(self.userdata.todolist[index].title)
                     .font(.headline)
                     .fontWeight(.heavy)
-                Text(self.duedate.description)
+                Text(self.userdata.todolist[index].duedate.description)
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
             .padding(.leading)
             Spacer()
-            Image(systemName: self.ischecked ? "checkmark.square.fill": "square")
+            Image(systemName: self.userdata.todolist[index].ischecked ? "checkmark.square.fill": "square")
     .imageScale(.large)
     .padding(.trailing)
                 .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-                    self.ischecked.toggle()
+                    self.userdata.todolist[index].ischecked.toggle()
                 })
         }
         .frame(height:80)
