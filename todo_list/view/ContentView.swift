@@ -51,22 +51,34 @@ struct ContentView: View {
 struct singlecardview:View {
    @EnvironmentObject var userdata:todo
     var index:Int
+    @State var showeditpage = false
 
     var body: some View{
         HStack {
             Rectangle()
                 .frame(width: 8)
                 .foregroundColor(.blue)
-            VStack(alignment: .leading, spacing:6) {
-                Text(self.userdata.todolist[index].title)
-                    .font(.headline)
-                    .fontWeight(.heavy)
-                Text(self.userdata.todolist[index].duedate.description)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-            }
-            .padding(.leading)
-            Spacer()
+            Button(action: {self.showeditpage = true}, label: {
+                    Group {
+                        VStack(alignment: .leading, spacing:6) {
+                            Text(self.userdata.todolist[index].title)
+                                .font(.headline)
+                                .fontWeight(.heavy)
+                                .foregroundColor(.black)
+                            Text(self.userdata.todolist[index].duedate.description)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.leading)
+                        Spacer()
+
+                    }            })
+                .sheet(isPresented: self.$showeditpage, content: {
+                    editview(title:self.userdata.todolist[index].title,
+                             duedate: self.userdata.todolist[index].duedate, id:self.index)
+                        .environmentObject(self.userdata)
+                })
+           
             Image(systemName: self.userdata.todolist[index].ischecked ? "checkmark.square.fill": "square")
     .imageScale(.large)
     .padding(.trailing)

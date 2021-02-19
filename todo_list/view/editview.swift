@@ -11,18 +11,29 @@ struct editview: View {
     @EnvironmentObject var userdata:todo
     @State var title:String = ""
     @State var duedate:Date = Date()
+     var id:Int? = nil
     @Environment(\.presentationMode) var presentation
     var body: some View {
         NavigationView{
             Form{
             Section(header: Text("事项")){
+                if(self.id == nil){
                     TextField("事项内容",text:self.$title)
-                   
                     DatePicker(selection: self.$duedate, label: { Text("截止日期") })
+                }
+                else{
+                    TextField("事项内容",text:self.$title)
+                    DatePicker(selection: self.$duedate, label: { Text("截止日期") })
+                }
                 }
                 Section{
                     Button(action: {
-                        self.userdata.add(data: singletodo(title: self.title, duedate: self.duedate))
+                        if self.id == nil{
+                            self.userdata.add(data: singletodo(title: self.title, duedate: self.duedate))
+                        }
+                        else{
+                            self.userdata.edit(id: self.id!, data:singletodo(title:self.title,duedate: self.duedate))
+                        }
                         self.presentation.wrappedValue.dismiss()
                         
                     }, label: {

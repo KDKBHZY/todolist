@@ -25,4 +25,10 @@ class todo:ObservableObject{
         self.todolist.append(singletodo(title: data.title, duedate: data.duedate,id: self.count))
         self.count+=1
     }
+    func edit(id:Int,data:singletodo){
+        self.todolist[id].title = data.title
+        self.todolist[id].duedate = data.duedate
+        self.todolist[id].ischecked = false
+        
+    }
 }
