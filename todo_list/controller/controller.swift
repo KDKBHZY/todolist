@@ -24,11 +24,22 @@ class todo:ObservableObject{
     func add(data:singletodo){
         self.todolist.append(singletodo(title: data.title, duedate: data.duedate,id: self.count))
         self.count+=1
+        self.sort()
     }
     func edit(id:Int,data:singletodo){
         self.todolist[id].title = data.title
         self.todolist[id].duedate = data.duedate
         self.todolist[id].ischecked = false
+        self.sort()
+    }
+    //按照日期排序
+    func sort(){
+        self.todolist.sort { (data1, data2) -> Bool in
+            return data1.duedate.timeIntervalSince1970 < data2.duedate.timeIntervalSince1970
+        }
         
+        for i in 0..<todolist.count{
+            self.todolist[i].id = i
+        }
     }
 }
