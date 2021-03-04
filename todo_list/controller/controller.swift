@@ -10,7 +10,6 @@ import Foundation
 class todo:ObservableObject{
     @Published var todolist:[singletodo]
     var count = 0
-    
     init() {
         self.todolist = []
     }
@@ -41,5 +40,10 @@ class todo:ObservableObject{
         for i in 0..<todolist.count{
             self.todolist[i].id = i
         }
+    }
+    
+    func delete(id:Int){
+        self.todolist[id].deleted = true
+        self.sort()
     }
 }

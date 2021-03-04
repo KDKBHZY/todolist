@@ -18,8 +18,10 @@ struct ContentView: View {
             ScrollView(.vertical, showsIndicators: true, content: {
                         VStack {
                             ForEach(self.userdata.todolist){ item in
-                                singlecardview(index: item.id
-                                ).environmentObject(self.userdata)
+                                if(!item.deleted){
+                                    singlecardview(index: item.id
+                                    ).environmentObject(self.userdata)
+                                }
                                 
                             }.padding()
 
@@ -58,6 +60,13 @@ struct singlecardview:View {
             Rectangle()
                 .frame(width: 8)
                 .foregroundColor(.blue)
+            Button(action: {
+                self.userdata.delete(id: index)
+            }, label: {
+                    Image(systemName: "trash")
+                        .imageScale(.large)
+                        .padding(.leading)            })
+           
             Button(action: {self.showeditpage = true}, label: {
                     Group {
                         VStack(alignment: .leading, spacing:6) {
@@ -72,7 +81,7 @@ struct singlecardview:View {
                         .padding(.leading)
                         Spacer()
 
-                    }            })
+                    } })
                 .sheet(isPresented: self.$showeditpage, content: {
                     editview(title:self.userdata.todolist[index].title,
                              duedate: self.userdata.todolist[index].duedate, id:self.index)

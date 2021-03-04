@@ -11,6 +11,7 @@ struct singletodo:Identifiable {
     var title:String = ""
     var duedate:Date = Date()
     var ischecked:Bool = false
-    
+    var deleted:Bool = false
+
     var id:Int = 0
 }
